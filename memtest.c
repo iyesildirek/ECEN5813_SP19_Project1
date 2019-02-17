@@ -9,12 +9,12 @@
 *
 *****************************************************************************/
 /**
-* @file Main.C
-* @brief This source file contains a c program to xxxx. 
+* @file memtest.c
+* @brief This source file contains a c program to manipulate and test memory. 
 *
 * @author Ismail Yesildirek & Bijan Kianian
-* @date February 16 2019
-* @version 1.0
+* @date February 17 2019
+* @version 1.1
 *
 */
 
@@ -22,61 +22,48 @@
 
 int main()
 {
-  char input[50];  // array to store input command line string
-  char *cmds[]={"help", "exit"}; // constant strings to be compared with user input commands
-  char *sub_texts[10];  //array of strings for saving sub texts after parsing user input line
-  char *pToken;  // Token pointer to be used in parsing command line input string
-  int tokenCount;  // counter used in parsing procedure
-  char **str[10];  // array of strings pointed to by the token
-  
- 
-       printf("This is a simple program for testing memory.\n");
-       printf("Type 'help' for more details.\n");
-      
-  while(1)
+	int validStatus = 0;  
+
+  while(validStatus == 0)
     {
-      strcpy(input,"");  //  clear array
-      scanf("%[^\n]%*c",input);  // accepting user command line string by eliminating '\n' 
-     
-      
-  
-      ////////////////////// parsing procedure (Start) ///////////////////////
-      tokenCount = 0;           
-       pToken = strtok (input," ");
-       str[0] = &pToken;
-	     
-	     while (pToken)
-	       {
-		 
-		 sub_texts[tokenCount] = *str[tokenCount];        // saving the parsed sub texts into *str[] array
-		 pToken = strtok (NULL, " ");
-	        	 
-		 tokenCount++;
-		 str[tokenCount] = &pToken;   
-	       }
-        //////////////////////////// parsing procedure (End) ///////////////////
-
-	    
-
-	     if ((strcmp(sub_texts[0], *cmds) == 0))                        /*Detecting the user input command: The first string (sub_texts[0]) 
-                                                                              shall be compared with the list of command strings saved in *cmds[] array*/
-	       {
-		 
-		 help();
-		 
-	       }
-	     		
-             else if(strcmp(sub_texts[0], *(cmds+1)) == 0)   // exit program
-	       {
-		 printf("\nGood Bye!\n\n");
-		 break;
-	       }
-	     else      // exit if "Enter" is hit w/o any command input
-	       break;
-      }
+      validStatus = inputCheck();
+    }
   
 return 0;
 }
 
+int inputCheck(void)
+{
+	printf("This is a simple program for testing memory.\n");
+	printf("Type 'help' for more details or 'exit' to leave the program: \n");
+	char userInput[50];  /* array to store input command line string */
+	scanf(" %s", &userInput);  /* accepting user command line string by eliminating '\n' */
+
+	char *cmds[] = { "help", "exit" }; /* constant strings to be compared with user input commands */
+	int valid = 0;
+
+	while (valid == 0)
+	{
+		if (strcmp(userInput, cmds[0]) == 0)
+		{
+			valid = 0;
+			help();
+			printf("Enter a command: \n");
+			scanf(" %s", &userInput);
+		}
+		else if (strcmp(userInput, cmds[1]) == 0)
+		{
+			valid = 1;
+			printf("\nGood Bye!\n\n");
+			return valid;
+		}
+		else
+		{
+			valid = 0;
+			printf("Invalid input, please try again: \n");
+			scanf(" %s", &userInput);
+		}
+	}
+}
 
      
