@@ -37,7 +37,7 @@ int inputCheck(void)
 	printf("This is a simple program for testing memory.\n");
 	printf("Type 'help' for more details or 'exit' to leave the program: \n");
 	char userInput[50];  /* array to store input command line string */
-	scanf(" %s", &userInput);  /* accepting user command line string by eliminating '\n' */
+	scanf(" %s", userInput);  /* accepting user command line string by eliminating '\n' */
 
 	char *cmds[] = { "help", "exit" }; /* constant strings to be compared with user input commands */
 	int valid = 0;
@@ -49,7 +49,7 @@ int inputCheck(void)
 			valid = 0;
 			help();
 			printf("Enter a command: \n");
-			scanf(" %s", &userInput);
+			scanf(" %s", userInput);
 		}
 		else if (strcmp(userInput, cmds[1]) == 0)
 		{
@@ -61,9 +61,8 @@ int inputCheck(void)
 		{
 			valid = 0;
 			printf("Invalid input, please try again: \n");
-			scanf(" %s", &userInput);
+			scanf(" %s", userInput);
 		}
 	}
-}
-
-     
+	return 0;
+}     
