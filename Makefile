@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-I. -Wall -c
+CFLAGS=-c -Wall -Werror
 
 memtest: memtest.o help.o
 	$(CC) -o  memtest memtest.o help.o
