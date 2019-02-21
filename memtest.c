@@ -4,17 +4,17 @@
 * Redistribution, modification or use of this software in source or binary
 * forms is permitted as long as the files maintain this copyright. Users are
 * permitted to modify this and use it to learn about the field of embedded
-* software. Ismail Yesildirek, Bijan Kianian, and the University of Colorado are not 
+* software. Ismail Yesildirek, Bijan Kianian, and the University of Colorado are not
 * liable for any misuse of this material.
 *
 *****************************************************************************/
 /**
-* @file Main.C
-* @brief This source file contains a c program to xxxx. 
+* @file memtest.c
+* @brief This source file contains a c program to manipulate and test memory.
 *
 * @author Ismail Yesildirek & Bijan Kianian
-* @date February 16 2019
-* @version 1.0
+* @date February 21 2019
+* @version 1.2
 *
 */
 
@@ -22,61 +22,103 @@
 
 int main()
 {
-  char input[50];  // array to store input command line string
-  char *cmds[]={"help", "exit"}; // constant strings to be compared with user input commands
-  char *sub_texts[10];  //array of strings for saving sub texts after parsing user input line
-  char *pToken;  // Token pointer to be used in parsing command line input string
-  int tokenCount;  // counter used in parsing procedure
-  char **str[10];  // array of strings pointed to by the token
-  
- 
-       printf("This is a simple program for testing memory.\n");
-       printf("Type 'help' for more details.\n");
-      
-  while(1)
-    {
-      strcpy(input,"");  //  clear array
-      scanf("%[^\n]%*c",input);  // accepting user command line string by eliminating '\n' 
-     
-      
-  
-      ////////////////////// parsing procedure (Start) ///////////////////////
-      tokenCount = 0;           
-       pToken = strtok (input," ");
-       str[0] = &pToken;
-	     
+	printf("This is a simple program for testing memory.\n");
+	printf("Type 'help' for more details or 'exit' to leave the program: \n");
+
+	int validStatus = 0;
+
+    while(validStatus == 0)
+       {
+          validStatus = inputCheck();
+       }
+
+    return 0;
+}
+/*########################################## inputCheck() Start #######################################################*/
+int inputCheck(void)
+{
+    char *cmds[] = { "help", "exit", "allocate", "free" };         /* Constant strings to be compared with user input commands */
+    char *Token[10];               /* Array of strings for saving tokens in command line after parsing user input line*/
+    char userInput[50];            /* Array to store input command line string */
+    int memoryOffsetValue ;        /* Offset value for the memory block to be allocated*/
+    int* ptr = NULL;               /* Pointer returned from allocate() */
+    int* Block_Address;            /* Place holder for block address*/
+
+        /***** Parsing variables ******/
+     char *pToken;                 /* Token pointer to be used in parsing command line input string*/
+     int tokenCount;               /* Counter used in parsing procedure*/
+     char **str[10];               /* Array of strings pointed to by the token*/
+        /*******************************/
+
+     fflush(stdin);        		 /*Flushing keyboard buffer*/
+     strcpy(userInput," ");
+     scanf("%[^\n]%*c", userInput); 	 /* Accepting user command line string by eliminating '\n' */
+
+ /**************************************** Parsing Start *************************************************/
+    tokenCount = 0;
+    pToken = strtok (userInput," ");
+    str[0] = &pToken;
+
 	     while (pToken)
 	       {
-		 
-		 sub_texts[tokenCount] = *str[tokenCount];        // saving the parsed sub texts into *str[] array
-		 pToken = strtok (NULL, " ");
-	        	 
-		 tokenCount++;
-		 str[tokenCount] = &pToken;   
-	       }
-        //////////////////////////// parsing procedure (End) ///////////////////
+             Token[tokenCount] = *str[tokenCount];    /* Saving the parsed texts into *str[] array*/
+             pToken = strtok (NULL, " ");
 
-	    
+             tokenCount++;
+             str[tokenCount] = &pToken;
+	       }
+/****************************************** Parsing End **************************************************/
 
-	     if ((strcmp(sub_texts[0], *cmds) == 0))                        /*Detecting the user input command: The first string (sub_texts[0]) 
-                                                                              shall be compared with the list of command strings saved in *cmds[] array*/
-	       {
-		 
-		 help();
-		 
-	       }
-	     		
-             else if(strcmp(sub_texts[0], *(cmds+1)) == 0)   // exit program
-	       {
-		 printf("\nGood Bye!\n\n");
-		 break;
-	       }
-	     else      // exit if "Enter" is hit w/o any command input
-	       break;
-      }
-  
-return 0;
+	int valid = 0;
+		if (strcmp(Token[0], cmds[0]) == 0)             /*     help()     */
+			{
+				valid = 0;
+				help();
+			}
+		else if (strcmp(Token[0], cmds[1]) == 0)      /*     exit()      */
+			{
+				valid = 1;
+				printf("\nGood Bye!\n\n");
+			}
+
+		else if (strcmp(Token[0], cmds[2]) == 0)       /*     allocate()    */
+			{
+						valid = 0;
+							memoryOffsetValue = atoi(Token[1]);
+				ptr = allocate(memoryOffsetValue);
+				Block_Address = ptr;       /* Local variable for address pointer */
+				if (Block_Address)
+				  {
+					printf("\nMemory block allocated.\n");
+					printf("Address: %p    size: %d   (%d Bytes1)\n", Block_Address, \
+					memoryOffsetValue, 4 * memoryOffsetValue);
+				  }
+
+			}
+
+		else if (strcmp(Token[0], cmds[3]) == 0)        /*    free()    */
+			{
+				valid = 0;
+
+				if(!Block_Address)
+					puts("Memory is not allocated yet!");
+
+				else
+					{
+						free_memory(Block_Address);
+						printf(" %d Bytes of heap released from address %p to %p\n", 4 * memoryOffsetValue,Block_Address, Block_Address + memoryOffsetValue);
+
+					}
+			}
+
+		else
+			{
+				valid = 0;
+				printf("Invalid input, please try again: \n");
+
+			}
+
+	return valid;
 }
+/*###################################### inputCheck () End #############################################*/
 
-
-     
