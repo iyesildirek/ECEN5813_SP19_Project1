@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-c -Wall -Werror
+CFLAGS=-c -g -Wall -Werror
 
 memtest: memtest.o help.o allocate.o free.o
 	$(CC) -o  memtest memtest.o help.o allocate.o free.o
@@ -7,8 +7,8 @@ memtest: memtest.o help.o allocate.o free.o
 help.o: help.c
 	$(CC) $(CFLAGS) help.c
 allocate.o:
-	$(CC) S(CFLAGS) allocate.c
+	$(CC) $(CFLAGS) allocate.c
 free.o: free.c
-	$(CC) S(CFLAGS) free.c
+	$(CC) $(CFLAGS) free.c
 clean:
 	rm -rf *o memtest
