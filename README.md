@@ -1,7 +1,7 @@
 # ECEN5813_SP19_Project1
-Project 1: Interactive memory manipulation
+## Project 1: Interactive memory manipulation
 
-functions created: 
+### Functions created: 
 
 Help - The initial greeting on startup must minimally indicate how to invoke the help function. 
 Invoking the help function will minimally list, to standard output, the available commands and how to invoke them.
