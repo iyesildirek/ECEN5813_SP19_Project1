@@ -20,8 +20,9 @@
 
 #include "memtest.h"
 
-    int memoryOffsetValue  = 0;        /* Offset value for the memory block to be allocated*/
-    int* Block_Address = NULL;            /* Place holder for block address*/
+int memoryOffsetValue  = 0;        /* Offset value for the memory block to be allocated*/
+int* Block_Address = NULL;            /* Place holder for block address*/
+int allocStatus = 0;	/* Malloc Flag */ 
 
 int main()
 {
@@ -40,12 +41,13 @@ int main()
 /*########################################## inputCheck() Start #######################################################*/
 int inputCheck(void)
 {
-    char *cmds[] = { "help", "exit", "allocate", "free", "display", "write"};         /* Constant strings to be compared with user input commands */
+    char *cmds[] = { "help", "exit", "allocate", "free", "display", "write", "invert"};         /* Constant strings to be compared with user input commands */
     char *Token[10] = {};               /* Array of strings for saving tokens in command line after parsing user input line*/
     char userInput[50] = {}, temp;      /* Array to store input command line string */
     int memoryValue;                    /* Value to be written at memory locaion defined by write()*/
     int location =0;                       /* Memory location offset from start of the block */
     int compareResult;
+	char allocInput[6]; /*For re-alloc question*/
         /***** Parsing variables ******/
      char *pToken;                 /* Token pointer to be used in parsing command line input string*/
      int tokenCount;               /* Counter used in parsing procedure*/
@@ -54,7 +56,7 @@ int inputCheck(void)
 
      fflush(stdin);                 /* Flushing keyboard buffer from previous input*/
      strcpy(userInput," ");         /* Reseting userInput string array*/
-
+	 strcpy(allocInput," ");         /* Reseting allocInput string array*/
      scanf("%[^\n]", userInput);	/* Accepting user Input*/
      scanf("%c", &temp);            /* Flushing '\n' character from the stdin buffer after user hit the 'Enter' */
      compareResult = strcmp(userInput,"");
@@ -66,12 +68,21 @@ int inputCheck(void)
       }
 
 
-
 /**************************************** Parsing Start *************************************************/
     tokenCount = 0;
     pToken = strtok (userInput," ");
-    str[0] = &pToken;
 
+	/*Check for an user input*/
+	while (!pToken)
+	{
+		printf("Invalid Input. Please try again: \n");
+		fflush(stdin);
+		scanf("%[^\n]s", userInput);	/* Accepting user Input*/
+		scanf("%c", &temp);		/* Flushing '\n' character from the stdin buffer */
+		pToken = strtok(userInput, " ");
+	}
+
+    str[0] = &pToken;
 	     while (pToken)
 	       {
              Token[tokenCount] = *str[tokenCount];    /* Saving the parsed texts into *str[] array*/
@@ -103,32 +114,79 @@ int inputCheck(void)
                          printf("Please enter a valid offset value, or <help> for details\n");
                          return valid;
                     }
-
-			   memoryOffsetValue = atoi(Token[1]);      /* Converting string to interger*/
-			   Block_Address = allocate(memoryOffsetValue);
-
-                if (Block_Address)
-                    {
-                        printf("\nMemory block allocated.\n\n");
-                        printf("Address: %p    size: %d   (%d Bytes)\n\n", Block_Address, \
-                        memoryOffsetValue, 4 * memoryOffsetValue);
-                    }
+				else
+				{
+			if (allocStatus == 0)
+			{
+				memoryOffsetValue = atoi(Token[1]);
+				//printf("String to int value = %d", memoryOffsetValue);
+				Block_Address = allocate(memoryOffsetValue);
+				if (Block_Address)
+				{
+					printf("\nMemory block allocated.\n");
+					printf("Address: %p    size: %d   (%ld Bytes)\n", Block_Address, \
+						memoryOffsetValue, sizeof(int) * memoryOffsetValue);
+					allocStatus = 1;
+					/*One memory allocation performed*/
+					printf("Enter another command: \n");
+				}
+			}
+			else
+			{
+				printf("\nMemory is current allocated in address 0x%p\n", Block_Address);
+				printf("\nDo you wish to override this data? (Y?) \n");
+				fflush(stdin);
+				scanf("%[^\n]s", allocInput);	/* Accepting override Input*/
+				scanf("%c", &temp);		/* Flushing '\n' character from the stdin buffer */
+				//printf("\nYour answer is: %s \n", allocInput);
+				if (strcmp(allocInput, "yes") == 0 || strcmp(allocInput, "YES") == 0 || strcmp(allocInput, "y") == 0 || strcmp(allocInput, "Y") == 0)
+				{
+					free_memory(Block_Address);
+					printf(" %ld Bytes of heap released from address %p to %p\n", \
+					sizeof(int) * memoryOffsetValue, Block_Address, Block_Address + memoryOffsetValue);
+					allocStatus = 0;
+					/*system ready to allocate memory again*/
+					memoryOffsetValue = atoi(Token[1]);
+					//printf("String to int value = %d", memoryOffsetValue);
+					Block_Address = allocate(memoryOffsetValue);
+					if (Block_Address)
+					{
+						printf("\nMemory block allocated.\n");
+						printf("Address: %p    size: %d   (%ld Bytes)\n", Block_Address, \
+						memoryOffsetValue, sizeof(int) * memoryOffsetValue);
+						allocStatus = 1;
+						/*One memory allocation performed*/
+						printf("Enter another command: \n");
+					}
+				}
+				else 
+					{
+					printf("\nMemory allocated remains in address 0x%p\n", Block_Address);
+					printf("Enter another command: \n");
+					}
+					
+				}
 
 			}
-
+			}
 		else if (strcmp(Token[0], cmds[3]) == 0)        /*    free()    */
 			{
 				valid = 0;
 
 				if(!Block_Address)
+				{
 					printf("Memory is not allocated yet!\n");
-
+					printf("Enter another command: \n");
+				}
 				else
 					{
 						free_memory(Block_Address);
-						printf(" %d Bytes of heap released from address %p to %p\n\n", \
-					           4 * memoryOffsetValue,Block_Address, Block_Address + memoryOffsetValue-1);
+						printf(" %ld Bytes of heap released from address %p to %p\n\n", \
+					           sizeof(int) * memoryOffsetValue,Block_Address, Block_Address + memoryOffsetValue-1);
                         Block_Address = NULL;
+						allocStatus = 0;
+						/*system ready to allocate memory again*/
+						printf("Enter another command: \n");
 					}
 			}
 
