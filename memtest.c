@@ -97,17 +97,6 @@ int inputCheck(void)
 		else if (strcmp(Token[0], cmds[2]) == 0)        /*     allocate()    */
 			{
 			   valid = 0;
-<<<<<<< HEAD
-			   memoryOffsetValue = atoi(Token[1]);
-			   printf("String to int value = %d",memoryOffsetValue);
-			   Block_Address = allocate(memoryOffsetValue);
-			if (Block_Address)
-				  {
-					printf("\nMemory block allocated.\n");
-					printf("Address: %p    size: %d   (%d Bytes1)\n", Block_Address, \
-					memoryOffsetValue, 4 * memoryOffsetValue);
-				  }
-=======
 
 		       if (Token[1]==0)             /* No offset enterred*/
                     {
@@ -125,7 +114,6 @@ int inputCheck(void)
                         memoryOffsetValue, 4 * memoryOffsetValue);
                     }
 
->>>>>>> 8b623d01fa42c3f1c316808f1485ede03362a901
 			}
 
 		else if (strcmp(Token[0], cmds[3]) == 0)        /*    free()    */
