@@ -10,6 +10,17 @@
 *****************************************************************************/
 /**
 * @file free.c
+<<<<<<< HEAD
+* @brief This source file contains code that provides the help function definition.
+*
+* @author Ismail Yesildirek & Bijan Kianian
+* @date February 21  2019
+* @version 1.0
+*
+*//*===================================*/
+/*          free_memory()           */
+/*===================================*/
+=======
 * @brief This source file contains code that provides the free() function definition 
 * and reserves a block of memory of the specified number of bytes.
 *
@@ -18,6 +29,7 @@
 * @version 1.0
 *
 */
+>>>>>>> 42ef48c76e84d82839600c721cfadf26700d407b
 
 #include "memtest.h"
 

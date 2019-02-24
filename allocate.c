@@ -10,6 +10,18 @@
 *****************************************************************************/
 /**
 * @file allocate.c
+<<<<<<< HEAD
+* @brief This source file contains a c program to manipulate and test memory.
+*
+* @author Ismail Yesildirek & Bijan Kianian
+* @date February 23 2019
+* @version 1.3
+*
+*/
+/*===================================*/
+/*            allocate()             */
+/*===================================*/
+=======
 * @brief This source file contains code that provides the allocate() function definition 
 * and frees the space allocated in the memory pointed by ptr.
 *
@@ -19,6 +31,7 @@
 *
 */
 
+>>>>>>> 42ef48c76e84d82839600c721cfadf26700d407b
 #include "memtest.h"
 
 int* allocate(int offset)
@@ -27,7 +40,7 @@ int* allocate(int offset)
   ptr =(int*) calloc(offset, sizeof(int));  // assigning an int pointer to the block of memory with requested size
 
   if (ptr == NULL)                          // check if there is a room available in the heap
-    printf("Allocation failed!\n");
+    printf("Allocation failed!\n\n");
 
   return ptr;
  }

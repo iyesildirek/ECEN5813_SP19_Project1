@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+/***************************************************************************
+=======
 /*****************************************************************************
+>>>>>>> 42ef48c76e84d82839600c721cfadf26700d407b
 * Copyright (C) 2019 by Ismail Yesildirek & Bijan Kianian
 *
 * Redistribution, modification or use of this software in source or binary
@@ -10,8 +14,12 @@
 *****************************************************************************/
 /**
 * @file write.c
+<<<<<<< HEAD
+* @brief This source file contains a c program to manipulate and test memory.
+=======
 * @brief This source file contains code that provides the write() function definition 
 * and modifies the memory at the indicated location.
+>>>>>>> 42ef48c76e84d82839600c721cfadf26700d407b
 *
 * @author Ismail Yesildirek & Bijan Kianian
 * @date February 23 2019
@@ -21,5 +29,14 @@
 
 #include "memtest.h"
 
+<<<<<<< HEAD
+void write(int* address, int offset, int value)
+{
+    *(address + offset) = value;
+    printf(" Value: %x written at address: %p\n\n", value, address + offset);
+    return;
+}
+=======
 
 
+>>>>>>> 42ef48c76e84d82839600c721cfadf26700d407b
