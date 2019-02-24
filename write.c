@@ -1,4 +1,4 @@
-/*****************************************************************************
+/***************************************************************************
 * Copyright (C) 2019 by Ismail Yesildirek & Bijan Kianian
 *
 * Redistribution, modification or use of this software in source or binary
@@ -9,27 +9,20 @@
 *
 *****************************************************************************/
 /**
-* @file memtest.h
-* @brief This header file provides user interface interaction
-* response via functions
+* @file write.c
+* @brief This source file contains a c program to manipulate and test memory.
 *
 * @author Ismail Yesildirek & Bijan Kianian
 * @date February 23 2019
-* @version 1.3
+* @version 1.0
 *
 */
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include "memtest.h"
 
-/* Prototype list */
-
-void help(void);
-int inputCheck(void);
-int* allocate(int);
-void free_memory(int*);
-void display(int*, int);
-void write(int*, int, int);
-
-/* End prototype list */
+void write(int* address, int offset, int value)
+{
+    *(address + offset) = value;
+    printf(" Value: %x written at address: %p\n\n", value, address + offset);
+    return;
+}
