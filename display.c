@@ -1,4 +1,3 @@
-#pragma once
 /*****************************************************************************
 * Copyright (C) 2019 by Ismail Yesildirek & Bijan Kianian
 *
@@ -10,26 +9,28 @@
 *
 *****************************************************************************/
 /**
-* @file memtest.h
-* @brief This header file provides user interface interaction
-* response via functions
+* @file display.c
+* @brief This source file contains code that provides the display() function definition
+* and displays content of memory in terms of 32 bit words in hexadecimal format.
 *
 * @author Ismail Yesildirek & Bijan Kianian
-* @date February 21 2019
-* @version 1.2
+* @date February 24 2019
+* @version 1.0
 *
 */
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
+#include "memtest.h"
 
-/* Prototype list */
+//printf("\tread <address> [<words>] - read from <address> for one or <words>\n");
 
-void help(void);
-int inputCheck(void);
-int* allocate(int);
-void free_memory(int*);
-void display(int*, int);
-
-/* End prototype list */
+void display(int* address, char word)
+{
+	int *ptr = address;
+	printf("address is 0x%X and word is: %s\n",ptr, word);
+	for (int i = 0; i < sizeof(word); i++)
+	{
+		printf("at address: 0x%p and word is: %d\n", ptr, *ptr);
+		ptr++;
+	}
+	return;
+}
