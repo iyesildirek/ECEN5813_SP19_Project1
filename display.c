@@ -1,4 +1,3 @@
-
 /***************************************************************************
 * Copyright (C) 2019 by Ismail Yesildirek & Bijan Kianian
 *
@@ -10,12 +9,13 @@
 *
 *****************************************************************************/
 /**
-* @file memtest.c
-* @brief This source file contains a c program to manipulate and test memory.
+* @file display.c
+* @brief This source file contains code that provides the display() function definition
+* and displays content of memory in terms of 32 bit words in hexadecimal format.
 *
 * @author Ismail Yesildirek & Bijan Kianian
-* @date February 23 2019
-* @version 1.3
+* @date February 24 2019
+* @version 1.4
 *
 */
 
