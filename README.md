@@ -1,8 +1,8 @@
 # ECEN5813_SP19_Project1
-<<<<<<< HEAD
+#<<<<<<< HEAD
 ## Project 1: Interactive Memory Manipulation
 =======
-<<<<<<< HEAD
+#<<<<<<< HEAD
 Project 1: Interactive memory manipulation
 02/16/2019:
 memtest.c, help.c, memtest.h and Makefile commited (BK)
@@ -10,9 +10,9 @@ memtest.c, help.c, memtest.h and Makefile commited (BK)
 memtest.c updated to impliment parsing command line input, free.c and allocate.c included to the project.
 2/23/2019:
 Aded write.c and display.c to the develop branch, memtest.c bugs removed.(BK)
-=======
+#=======
 ## Project 1: Interactive memory manipulation
->>>>>>> 8b623d01fa42c3f1c316808f1485ede03362a901
+#>>>>>>> 8b623d01fa42c3f1c316808f1485ede03362a901
 
 ### Functions Created: 
 
@@ -33,4 +33,4 @@ Memory at the indicated location is modified accordingly.
 Invert block - Use an XOR operation to invert all memory bits in a specified area of memory. 
 On completion, this command should report the amount of time taken to perform the operation.
 
->>>>>>> 42ef48c76e84d82839600c721cfadf26700d407b
+#>>>>>>> 42ef48c76e84d82839600c721cfadf26700d407b
