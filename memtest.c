@@ -85,6 +85,7 @@ int inputCheck(void)
 			{
 			   valid = 0;
 			   memoryOffsetValue = atoi(Token[1]);
+			   printf("String to int value = %d",memoryOffsetValue);
 			   Block_Address = allocate(memoryOffsetValue);
 			if (Block_Address)
 				  {
@@ -92,7 +93,6 @@ int inputCheck(void)
 					printf("Address: %p    size: %d   (%d Bytes1)\n", Block_Address, \
 					memoryOffsetValue, 4 * memoryOffsetValue);
 				  }
-
 			}
 
 		else if (strcmp(Token[0], cmds[3]) == 0)        /*    free()    */
