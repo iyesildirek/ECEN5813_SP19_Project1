@@ -15,12 +15,37 @@
 * the time taken to perform the operation. 
 *
 * @author Ismail Yesildirek & Bijan Kianian
-* @date February 23 2019
+* @date February 24 2019
 * @version 1.0
 *
 */
 
 #include "memtest.h"
 
-
+void invert(int* address, int offset)
+{
+	if(address ==NULL)
+	{
+		printf("Null pointer provided try again.\n");
+		return;
+	}
+	else
+	{
+	int temp = *(address + offset);
+	//printf(" Current Value: %x written at address: %p\n\n", *(address + offset), address + offset);
+	int bitPosition;
+    for (int i = 0; i < 32; i++)  
+	{
+		bitPosition = 1<<i;
+		temp = (temp ^ bitPosition); 
+	}
+	
+	int value = temp; 
+	
+	/*write to memory section*/ 
+	*(address + offset) = value;
+	//printf("\n");
+	}
+	return;
+}
 
