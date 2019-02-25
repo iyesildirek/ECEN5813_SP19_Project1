@@ -23,15 +23,13 @@
 
 void display(int* address, int offset)
 {
-
-    printf("\n   Address                     Value \n");
-    printf("  ------------               ----------\n");
-
+    printf("\n   Address                     Value \t Index\n");
+    printf("  ------------               ----------\t ------\n");
     for(int i = 0 ; i < offset ; i++)
     {
-        printf(" %p              0x%08x\n" , address + i, *(address + i));
+        printf(" %p              0x%08x    %d\n" , address + i, *(address + i),i);
     }
-
     printf("\n");
+	printf("Enter another command: \n");
     return;
 }
