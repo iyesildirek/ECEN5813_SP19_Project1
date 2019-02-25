@@ -23,14 +23,15 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
+#include "allocate.h"
+#include "display.h"
+#include "free.h"
+#include "help.h"
+#include "invert.h"
+#include "write.h"
+
 /* Prototype list */
 
-void help(void);
 int inputCheck(void);
-int* allocate(int);
-void free_memory(int*);
-void display(int*, int);
-void write(int*, int, int);
-void invert(int*, int);
 
 /* End prototype list */
