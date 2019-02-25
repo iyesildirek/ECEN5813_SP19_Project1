@@ -16,5 +16,8 @@ write.o: write.c write.h
 	$(CC) $(CFLAGS) write.c
 invert.o: invert.c invert.h
 	$(CC) $(CFLAGS) invert.c
+test: memtest test.txt 
+		./memtest<test.txt>outputFile.txt
 clean:
 	rm -rf *o memtest
+	rm -rf outputFile.txt
