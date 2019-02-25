@@ -272,8 +272,8 @@ int inputCheck(void)
                     }
 
             }
-			else if (strcmp(Token[0], cmds[6]) == 0)        /*    invert()    */
-	{
+		else if (strcmp(Token[0], cmds[6]) == 0)        /*    invert()    */
+		{
 		valid = 0;
 		if (!Block_Address)
 		{
@@ -297,7 +297,8 @@ int inputCheck(void)
 			return valid;
 		}
 
-		int numberOfwords = atoi(Token[2]);       /* Number of locations (words) to display */
+		int numberOfwords = atoi(Token[2]);       
+		/* Number of locations (words) to display */
 		if (numberOfwords > (memoryOffsetValue - startOffset))
 		{
 			printf("Please enter valid number of words between 1 to %d\n", \
@@ -320,7 +321,7 @@ int inputCheck(void)
 		double time = ((double)executionT)/CLOCKS_PER_SEC;
 		printf("Invert function execution time is milli: %fsec.\n",time*1000);
 		printf("Enter another command: \n");
-	}
+		}
 			
 		else
 		    {
