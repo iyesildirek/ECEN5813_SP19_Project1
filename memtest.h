@@ -14,7 +14,7 @@
 * response via functions
 *
 * @author Ismail Yesildirek & Bijan Kianian
-* @date February 23 2019
+* @date February 24 2019
 * @version 1.3
 *
 */
@@ -22,7 +22,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
+#include <time.h>
 /* Prototype list */
 
 void help(void);
@@ -31,5 +31,6 @@ int* allocate(int);
 void free_memory(int*);
 void display(int*, int);
 void write(int*, int, int);
+void invert(int*, int);
 
 /* End prototype list */
