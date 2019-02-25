@@ -9,29 +9,18 @@
 *
 *****************************************************************************/
 /**
-* @file memtest.h
+* @file write.h
 * @brief This header file provides user interface interaction
 * response via functions
 *
 * @author Ismail Yesildirek & Bijan Kianian
 * @date February 24 2019
-* @version 1.3
+* @version 1.0
 *
 */
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <time.h>
-#include "allocate.h"
-#include "display.h"
-#include "free.h"
-#include "help.h"
-#include "invert.h"
-#include "write.h"
-
 /* Prototype list */
 
-int inputCheck(void);
+void write(int*, int, int);
 
 /* End prototype list */

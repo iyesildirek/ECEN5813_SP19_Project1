@@ -1,4 +1,4 @@
-/*****************************************************************************
+/***************************************************************************
 * Copyright (C) 2019 by Ismail Yesildirek & Bijan Kianian
 *
 * Redistribution, modification or use of this software in source or binary
@@ -9,29 +9,22 @@
 *
 *****************************************************************************/
 /**
-* @file memtest.h
-* @brief This header file provides user interface interaction
-* response via functions
-*
+* @file write.c
+* @brief This source file contains a c program  that provides the write() function definition
+* and writes to a prevously allocated block of memory a hex number.
 * @author Ismail Yesildirek & Bijan Kianian
 * @date February 24 2019
-* @version 1.3
+* @version 1.0
 *
 */
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <time.h>
-#include "allocate.h"
-#include "display.h"
-#include "free.h"
-#include "help.h"
-#include "invert.h"
+#include "memtest.h"
 #include "write.h"
 
-/* Prototype list */
-
-int inputCheck(void);
-
-/* End prototype list */
+void write(int* address, int offset, int value)
+{
+    *(address + offset) = value;
+    printf(" Value: %x written at address: %p\n\n", value, address + offset);
+	printf("Enter another command: \n");
+    return;
+}

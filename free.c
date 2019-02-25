@@ -9,29 +9,28 @@
 *
 *****************************************************************************/
 /**
-* @file memtest.h
-* @brief This header file provides user interface interaction
-* response via functions
+* @file free.c
+* @brief This source file contains code that provides the free() function definition
+* and reserves a block of memory of the specified number of bytes.
 *
 * @author Ismail Yesildirek & Bijan Kianian
 * @date February 24 2019
-* @version 1.3
+* @version 1.1
 *
 */
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <time.h>
-#include "allocate.h"
-#include "display.h"
+#include "memtest.h"
 #include "free.h"
-#include "help.h"
-#include "invert.h"
-#include "write.h"
 
-/* Prototype list */
-
-int inputCheck(void);
-
-/* End prototype list */
+void free_memory(int *pointer)
+{
+	if (*pointer) /* use for calloc */
+/*	if (!*pointer) // user for malloc */
+	{
+		printf("Null pointer was provided. Previous released memory: \n");
+	}
+	else {
+		free(pointer);
+	}
+	return;
+}
