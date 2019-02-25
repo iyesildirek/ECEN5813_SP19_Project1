@@ -13,8 +13,8 @@
 * @brief This source file contains a c program to manipulate and test memory.
 *
 * @author Ismail Yesildirek & Bijan Kianian
-* @date February 23 2019
-* @version 1.3
+* @date February 24 2019
+* @version 1.4
 *
 */
 
@@ -41,7 +41,7 @@ int main()
 /*########################################## inputCheck() Start #######################################################*/
 int inputCheck(void)
 {
-    char *cmds[] = { "help", "exit", "allocate", "free", "display", "write", "invert"};         /* Constant strings to be compared with user input commands */
+    char *cmds[] = { "help", "exit", "allocate", "free", "read", "write", "invert"};         /* Constant strings to be compared with user input commands */
     char *Token[10] = {};               /* Array of strings for saving tokens in command line after parsing user input line*/
     char userInput[50] = {}, temp;      /* Array to store input command line string */
     int memoryValue;                    /* Value to be written at memory locaion defined by write()*/
@@ -272,6 +272,56 @@ int inputCheck(void)
                     }
 
             }
+			else if (strcmp(Token[0], cmds[6]) == 0)        /*    invert()    */
+	{
+		valid = 0;
+		if (!Block_Address)
+		{
+		printf("Memory is not allocated yet!\n\n");
+		return valid;
+		}
+
+		else  if (Token[1] == 0 || Token[2] == 0)     /* No offset/value enterred*/
+		{
+		printf("Please enter a valid starting offset and number of words, or <help> for details\n");
+		return valid;
+		}
+
+		int startOffset = atoi(Token[1]);        /* Starting memory location offset from Block_Address*/
+
+/* Condtion check for valid offset between 0 to block size (memoryOffsetValue) */
+
+		if ((startOffset < 0) || (startOffset > (memoryOffsetValue - 1)))
+		{
+			printf("Please enter valid offset between 0 to %d\n", memoryOffsetValue - 1);
+			return valid;
+		}
+
+		int numberOfwords = atoi(Token[2]);       /* Number of locations (words) to display */
+		if (numberOfwords > (memoryOffsetValue - startOffset))
+		{
+			printf("Please enter valid number of words between 1 to %d\n", \
+				memoryOffsetValue - startOffset);
+			return valid;
+		}
+		int wordSize = numberOfwords;
+		/**
+		* Invert Byte Block per wordSize selected
+		* and start timer.
+		**/
+		clock_t executionT; 
+		executionT = clock();
+		while ((numberOfwords <= wordSize) && (numberOfwords >=0))
+		{
+		invert(Block_Address+startOffset, numberOfwords);
+		numberOfwords--;
+		}
+		executionT = clock() - executionT;
+		double time = ((double)executionT)/CLOCKS_PER_SEC;
+		printf("Invert function execution time is milli: %fsec.\n",time*1000);
+		printf("Enter another command: \n");
+	}
+			
 		else
 		    {
 		        valid = 0;
