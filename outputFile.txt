@@ -1,0 +1,47 @@
+This is a simple program for testing memory.
+Type 'help' for more details or 'exit' to leave the program: 
+Invalid input, please try again: 
+
+Memory block allocated.
+Address: 0x5646ff1b7280    size: 5   (20 Bytes)
+Enter another command: 
+
+   Address                     Value 	 Index
+  ------------               ----------	 ------
+ 0x5646ff1b7280              0x00000000    0
+ 0x5646ff1b7284              0x00000000    1
+ 0x5646ff1b7288              0x00000000    2
+ 0x5646ff1b728c              0x00000000    3
+ 0x5646ff1b7290              0x00000000    4
+
+Enter another command: 
+Invalid input, please try again: 
+
+Memory is current allocated in address 0x0x5646ff1b7280
+
+Do you wish to override this data? (Y?) 
+
+Memory allocated remains in address 0x0x5646ff1b7280
+Enter another command: 
+Invalid input, please try again: 
+Please enter valid number of words between 1 to 5
+Please enter a valid 32bit hex number for the memory value
+Please enter a valid 32bit hex number for the memory value
+Please enter a valid 32bit hex number for the memory value
+Please enter a valid 32bit hex number for the memory value
+Please enter valid number of words between 1 to 5
+Please enter valid number of words between 1 to 5
+Please enter valid number of words between 1 to 5
+Invalid input, please try again: 
+Invalid input, please try again: 
+
+Memory is current allocated in address 0x0x5646ff1b7280
+
+Do you wish to override this data? (Y?) 
+
+Memory allocated remains in address 0x0x5646ff1b7280
+Enter another command: 
+Invalid input, please try again: 
+
+Good Bye!
+

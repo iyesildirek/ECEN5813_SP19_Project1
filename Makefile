@@ -21,4 +21,3 @@ test: memtest test.txt
 clean:
 	rm -rf *o memtest
 	rm -rf outputFile.txt
-

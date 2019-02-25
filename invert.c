@@ -49,4 +49,3 @@ void invert(int* address, int offset)
 	}
 	return;
 }
-

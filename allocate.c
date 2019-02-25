@@ -37,4 +37,3 @@ int* allocate(int offset)
 
   return ptr;
  }
-
