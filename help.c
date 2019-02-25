@@ -19,6 +19,7 @@
 */
 
 #include "memtest.h"
+#include "help.h"
 
   void help (void)
   {

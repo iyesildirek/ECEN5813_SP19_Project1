@@ -20,6 +20,7 @@
 */
 
 #include "memtest.h"
+#include "allocate.h"
 
 int* allocate(int offset)
 {

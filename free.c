@@ -20,6 +20,7 @@
 */
 
 #include "memtest.h"
+#include "free.h"
 
 void free_memory(int *pointer)
 {

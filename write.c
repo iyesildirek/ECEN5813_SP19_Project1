@@ -19,6 +19,7 @@
 */
 
 #include "memtest.h"
+#include "write.h"
 
 void write(int* address, int offset, int value)
 {

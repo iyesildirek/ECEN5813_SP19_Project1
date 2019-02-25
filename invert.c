@@ -21,6 +21,7 @@
 */
 
 #include "memtest.h"
+#include "invert.h"
 
 void invert(int* address, int offset)
 {

@@ -20,6 +20,7 @@
 */
 
 #include "memtest.h"
+#include "display.h"
 
 void display(int* address, int offset)
 {
