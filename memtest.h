@@ -29,9 +29,11 @@
 #include "help.h"
 #include "invert.h"
 #include "write.h"
+#include "pattern.h"
 
 /* Prototype list */
 
 int inputCheck(void);
+void pattern_Time(int ,int ,int );
 
 /* End prototype list */

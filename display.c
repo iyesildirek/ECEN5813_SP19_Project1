@@ -32,5 +32,6 @@ void display(int* address, int offset)
     }
     printf("\n");
 	printf("Enter another command: \n");
+    printf("PES_Prj1 >> ");
     return;
 }

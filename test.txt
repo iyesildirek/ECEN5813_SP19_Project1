@@ -3,7 +3,7 @@ allocate 5
 read 0 5
 free
 allocate 2
-allocate 5
+allocate 6
 Y
 read 0 6
 write 0 1111ffff
