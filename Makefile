@@ -1,8 +1,8 @@
 CC=gcc
 CFLAGS=-c -Wall -Werror
 
-memtest: memtest.o help.o allocate.o free.o display.o write.o invert.o
-	$(CC) -o  memtest memtest.o help.o allocate.o free.o display.o write.o invert.o
+memtest: memtest.o help.o allocate.o free.o display.o write.o invert.o pattern.o
+	$(CC) -o  memtest memtest.o help.o allocate.o free.o display.o write.o invert.o pattern.o
 	$(CC) $(CFLAGS) memtest.c
 help.o: help.c help.h
 	$(CC) $(CFLAGS) help.c
@@ -16,7 +16,9 @@ write.o: write.c write.h
 	$(CC) $(CFLAGS) write.c
 invert.o: invert.c invert.h
 	$(CC) $(CFLAGS) invert.c
-test: memtest test.txt 
+pattern.o: pattern.c pattern.h
+	$(CC) $(CFLAGS) pattern.c
+test: memtest test.txt
 		./memtest<test.txt>outputFile.txt
 clean:
 	rm -rf *o memtest
