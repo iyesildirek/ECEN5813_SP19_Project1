@@ -30,7 +30,7 @@
 #include "invert.h"
 #include "write.h"
 #include "pattern.h"
-#include "validate.h"
+#include "verify.h"
 
 /* Prototype list */
 
@@ -40,7 +40,7 @@ int addressCheck(char*, int);
 int valueCheck(char*);
 int offsetCheck(char*);
 int lengthCheck(char*, int);
-int alloc_test(char*,char*, char*, char*);
+int alloc_test(char*, char*, char*, char*, char*);
 void invert_Time(int, int);
 int seedCheck(char*);
 

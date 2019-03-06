@@ -13,8 +13,8 @@
 * @brief This source file contains a c program to manipulate and test memory.
 *
 * @author Ismail Yesildirek & Bijan Kianian
-* @date February 24 2019
-* @version 1.4
+* @date March 6 2019
+* @version 1.5
 *
 */
 #define test 0
@@ -41,7 +41,7 @@ int main()
 /*########################################## inputCheck() [Start] #######################################################*/
 int inputCheck(void)
 {
-    char *cmds[] = { "help", "exit", "allocate", "free", "read", "write", "invert", "pattern", "validate"};         /* Constant strings to be compared with user input commands */
+    char *cmds[] = { "help", "exit", "allocate", "free", "read", "write", "invert", "pattern", "verify"};         /* Constant strings to be compared with user input commands */
     char *Token[10] = {};               /* Array of strings for saving tokens in command line after parsing user input line*/
     char userInput[50] = {}, temp;      /* Array to store input command line string */
     int memoryValue;
@@ -203,11 +203,11 @@ int inputCheck(void)
 			}
 
 
-		else if (strcmp(Token[0], cmds[4]) == 0)        /*    display()   */
+		else if (strcmp(Token[0], cmds[4]) == 0)        /*    read()   */
 		    {
                valid = 0;
 
-                if(!(alloc_test(Token[0], Token[1], Token[2], "0")))
+                if(!(alloc_test(Token[0], Token[1], Token[2], Token[3], Token[4])))
 					return valid;
 
 
@@ -227,10 +227,13 @@ int inputCheck(void)
                     {																														//	Token[1] == "-i", Token[2] = <address>, Token[3] = <offset>.
 						Block_Address_lo =  (int64_t)Block_Address;
 						memoryAddress = addressCheck(Token[2], Block_Address_lo);
+
+				        if(memoryAddress == 0)
+							return valid;
 						startOffset = (memoryAddress - Block_Address_lo)/4;
 						numberOfwords = lengthCheck(Token[3],startOffset);
 
-						if((memoryAddress== 0)||(numberOfwords == 0))
+						if(numberOfwords == 0)
 							return valid;
 
 						int* Start = Block_Address + startOffset;
@@ -244,7 +247,7 @@ int inputCheck(void)
 		    {
                 valid = 0;
 
-				if(!(alloc_test(Token[0], Token[1], Token[2], "0")))
+				if(!(alloc_test( Token[0], Token[1], Token[2], Token[3], Token[4])))
 					return valid;
 
 				if(strcmp(Token[1] , "-i"))																					//	For relative addressing:
@@ -252,7 +255,7 @@ int inputCheck(void)
 						startOffset = offsetCheck(Token[1]);
 						memoryValue = valueCheck(Token[2]);
 
-						if((startOffset == -1) || (memoryValue== 0))
+						if((startOffset == -1) || (memoryValue== -1))
 							return valid;
 
 						write(Block_Address, startOffset, memoryValue);
@@ -265,7 +268,7 @@ int inputCheck(void)
                                 memoryAddress= addressCheck(Token[2], Block_Address_lo);
 								memoryValue = valueCheck(Token[3]);
 
-								if((memoryAddress == 0) || (memoryValue == 0))
+								if((memoryAddress == 0) || (memoryValue == -1))
 									return valid;
                                 startOffset = 0;		/* No offset for immediate addresing */
 
@@ -278,7 +281,7 @@ int inputCheck(void)
 		else if (strcmp(Token[0], cmds[6]) == 0)        /*    invert()    */
             {
             valid = 0;
-                if(!(alloc_test(Token[0], Token[1], Token[2], "0")))
+                if(!(alloc_test( Token[0], Token[1], Token[2], Token[3], Token[4])))
 					return valid;
 
 				if(strcmp(Token[1] , "-i")) /* Relative addressing <offset> < value>*/
@@ -298,10 +301,14 @@ int inputCheck(void)
 					{
 						Block_Address_lo =  (int64_t)Block_Address;
 						memoryAddress = addressCheck(Token[2], Block_Address_lo);
+
+						if(memoryAddress == 0)
+							return valid;
+
 						startOffset = (memoryAddress - Block_Address_lo)/4;
 						numberOfwords = lengthCheck(Token[3], startOffset);
 
-						if((memoryAddress == 0)||(numberOfwords == 0))
+						if(numberOfwords == 0)
 							return valid;
 
 
@@ -312,7 +319,7 @@ int inputCheck(void)
         else if (strcmp(Token[0], cmds[7]) == 0)        /*    pattern()    */
             {
 				valid = 0;
-                if(!(alloc_test(Token[0], Token[1], Token[2], Token[3])))
+                if(!(alloc_test( Token[0], Token[1], Token[2], Token[3], Token[4])))
 					return valid;
 
 				if(strcmp(Token[1] , "-i")) /* Relative addressing <offset> < value>*/
@@ -324,8 +331,9 @@ int inputCheck(void)
 							return valid;
 
 						Seed = seedCheck(Token[3]);
-						if(Seed == 0)
+						if(Seed == -1)
 							return valid;
+
 						pattern_Time( startOffset, numberOfwords,Seed );
 					}
 
@@ -335,21 +343,28 @@ int inputCheck(void)
 
 						Block_Address_lo =  (int64_t)Block_Address;
 						memoryAddress = addressCheck(Token[2], Block_Address_lo);
+
+						if(memoryAddress == 0)
+							return valid;
+
 						startOffset = (memoryAddress - Block_Address_lo)/4;
 						numberOfwords = lengthCheck(Token[3], startOffset );
 
-						if((memoryAddress== 0)||(numberOfwords == 0))
+						if(numberOfwords == 0)
 							return valid;
 
 
 						Seed = seedCheck(Token[4]);
+						if(Seed == -1)
+							return valid;
+
 						pattern_Time( startOffset,  numberOfwords, Seed );
 					}
             }
-        else if (strcmp(Token[0], cmds[8]) == 0)        /*    validate()    */
+        else if (strcmp(Token[0], cmds[8]) == 0)        /*    verify()    */
             {
 				valid = 0;
-                if(!(alloc_test(Token[0], Token[1], Token[2], Token[3])))
+                if(!(alloc_test(Token[0], Token[1], Token[2], Token[3], Token[4])))
 					return valid;
 
 				if(strcmp(Token[1] , "-i")) /* Relative addressing <offset> < value>*/
@@ -361,10 +376,10 @@ int inputCheck(void)
 							return valid;
 
 						Seed = seedCheck(Token[3]);
-						if(Seed == 0)
+						if(Seed == -1)
 							return valid;
 
-						validate( Block_Address,startOffset, numberOfwords,Seed );
+						verify( Block_Address,startOffset, numberOfwords,Seed );
 					}
 
 
@@ -373,18 +388,22 @@ int inputCheck(void)
 
 						Block_Address_lo =  (int64_t)Block_Address;
 						memoryAddress = addressCheck(Token[2], Block_Address_lo);
+
+						if(memoryAddress == 0)
+							return valid;
+
 						startOffset = (memoryAddress - Block_Address_lo)/4;
 						numberOfwords = lengthCheck(Token[3], startOffset );
 
-						if((memoryAddress== 0)||(numberOfwords == 0))
+						if(numberOfwords == 0)
 							return valid;
 
 
 						Seed = seedCheck(Token[4]);
-						if(Seed == 0)
+						if(Seed == -1)
 							return valid;
 
-						validate( Block_Address, startOffset,  numberOfwords, Seed );
+						verify( Block_Address, startOffset,  numberOfwords, Seed );
 					}
             }
 		else
@@ -446,7 +465,7 @@ int offsetCheck(char* str)
 int lengthCheck(char* str, int startOffset)
 {
 	int length = atoi (str);       /* Number of locations (words) to display */
-		if(length > (memoryOffsetValue - startOffset))
+		if((length > (memoryOffsetValue - startOffset)) || length <= 0)
 							{
 								printf("Please enter valid length between 1 to %d\n", \
 								memoryOffsetValue-startOffset);
@@ -468,7 +487,7 @@ int valueCheck(char* str)
                                     {
                                         printf("Please enter a valid 32bit hex number for the value\n");
                                         printf("PES_Prj1 >> ");
-                                        return 0;
+                                        return -1;
                                     }
 
                                 int memoryValue = strtol(str, NULL, 16); /* Converting string to hex */
@@ -488,9 +507,9 @@ int addressCheck(char* str1, int Block_Address_lo)
 
 	 validInput = strcspn(str1, "ghijklmnopqrstuvwxyz.GHIJKLMNOPQRSTUVWXYZ,][{}`+-*/"); /* Validating start address for correct hex number*/
 
-						if((validInput < strlen(str1) || (validInput> 16)))
+						if((validInput < strlen(str1) || (validInput != 12)))	/* Maximum 12 characters for address value */
 							{
-								printf("Please enter a valid 64bit hex number for the memory address\n");
+								printf("Please enter a valid hex number for the memory address\n");
 								printf("PES_Prj1 >> ");
 								return 0;
 							}
@@ -499,7 +518,8 @@ int addressCheck(char* str1, int Block_Address_lo)
 
 						/* Validating the starting address being in the range of allocated block */
 
-						if (memoryAddress- Block_Address_lo > 4*(memoryOffsetValue-1))	/* 4 bytes distance between two immediate memory addresses*/
+						if ((memoryAddress- Block_Address_lo > 4*(memoryOffsetValue-1)) ||  /* 4 bytes distance between two immediate memory addresses*/
+     						(memoryAddress < Block_Address_lo))
 							{
 								printf("Please enter the starting memory address between %p and %p\n", Block_Address, Block_Address + memoryOffsetValue-1);
 								printf("PES_Prj1 >> ");
@@ -511,10 +531,10 @@ int addressCheck(char* str1, int Block_Address_lo)
 /**************************************addressCheck [End] ************************************/
 
 /************************************** alloc_test() [Start] *************************************************/
-//	This function tests a the beginnign of each user command for aloocated memory block.
-//        if it is not allocated, an error message will inform the user
+//	This function tests at the beginnign of each user command for aloocated memory block and proper arguments.
+//        if it is not allocated, or address/offset or value are not provided, an error message will inform the user
 
-int alloc_test(char* str0, char* str1, char* str2, char* str3)
+int alloc_test(char* str0, char* str1, char* str2, char* str3, char* str4)
 {
 
 				if(!Block_Address)
@@ -524,22 +544,16 @@ int alloc_test(char* str0, char* str1, char* str2, char* str3)
                         return 0;
                     }
 
-                if (str1== 0 || str2 == 0)     /* No offset/value enterred*/
+                  if ((str1 == 0 || str2 == 0) || (!strcmp(str1,"-i") && str3 == 0) \
+						|| (((!strcmp(str0, "pattern") || (!strcmp(str0,"verify")))) && str3 == 0) \
+						|| (((!strcmp(str0, "pattern") || (!strcmp(str0,"verify")))) && (!strcmp(str1,"-i") && str4 == 0)) )  /* No offset/value enterred*/
                     {
-                        printf("Please enter a valid starting offset and number of words, or <help> for details\n");
+                        printf("Please enter sufficient parameters for this command, or <help> for details\n");
                         printf("PES_Prj1 >> ");
                         return 0;
                     }
 
-
-				 if (!(strcmp(str0,"pattern")) && str3 == 0)  /* No offset/value enterred*/
-                    {
-                        printf("Please enter a valid starting offset, number of words and seed, or <help> for details\n");
-                        printf("PES_Prj1 >> ");
-                        return 0;
-                    }
-
-	return 1;
+			return 1;
 }
 /************************************** alloc_test() [End] *************************************************/
  /**************************************invert_Time() [Start]************************************************/
@@ -577,16 +591,16 @@ int alloc_test(char* str0, char* str1, char* str2, char* str3)
 			int validInput = strcspn(str,\
 			 "abcdefghijklmnopqrstuvwxyz.ABCDEFGHIJKLMNOPQRSTUVWXYZ,][{}`/+-*"); /* Validating correct int number for Seed*/
 
-			if(validInput < strlen(str) ||(validInput > 10)) /* Check if the number(seed) in larger than 10 digits
-																	 (as in max 32 bit interger = 4,294,967,295)*/
+			if(validInput < strlen(str) ||(validInput > 10))/* Check if the number(seed) in larger than 10 digits
+																	                 (as in max 31 bit interger = 2,147,483,647)*/
 				{
-					printf("Please enter a valid positive number for the 'Seed' value\n");
+					printf("Please enter a positive decimal number for the 'Seed' between 0 and 2,147,483,647\n");
 					printf("PES_Prj1 >> ");
-					return 0;
+					return -1;
 				}
-
 		}
-    int Seed = atoi (str);        /* Converting string to number */
+			int Seed = atoi (str);        /* Converting string to number */
+
 	return Seed;
  }
 /**************************************** seedCheck() [End] *************************************/
