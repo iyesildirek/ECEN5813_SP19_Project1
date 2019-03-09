@@ -21,7 +21,7 @@ pattern.o: pattern.c pattern.h
 validate.o: validate.c validate.h
 	$(CC) $(CFLAGS) validate.c
 verify.o: verify.c verify.h
-	$(CC) $(CFLAGS) verify.c	
+	$(CC) $(CFLAGS) verify.c
 test: memtest test.txt
 		./memtest<test.txt>outputFile.txt
 clean:
