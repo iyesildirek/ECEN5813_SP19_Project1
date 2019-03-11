@@ -19,6 +19,7 @@
 *
 */
 
+#include <stdint.h>
 /* Prototype list */
 
 void invert(int32_t*, int32_t);

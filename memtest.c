@@ -13,8 +13,8 @@
 * @brief This source file contains a c program to manipulate and test memory.
 *
 * @author Ismail Yesildirek & Bijan Kianian
-* @date March 6 2019
-* @version 1.5
+* @date March 10 2019
+* @version 1.6
 *
 */
 
@@ -184,7 +184,7 @@ int32_t inputCheck(void)
                                     if (Block_Address)
                                         {
                                             printf("\nMemory block allocated.\n");
-#if FRDM											
+#if FRDM
                                             printf("Address: %p    size: %ld   (%ld Bytes)\n", Block_Address, \
                                             memoryOffsetValue, sizeof(int32_t) * memoryOffsetValue);
 #else
@@ -471,7 +471,6 @@ int32_t inputCheck(void)
 	count = SYSTICK_MAX - SysTick->VAL;		/* SysTick->VAL holds the decremented value of systick timer register */
 											/* 'count' holds number of ticks, each tick takes ~21 nanosecond (48 MHZ clock)*/
 	SysTick->CTRL = 4 ;						/* Disable couting = 0b100 */
-
 	if ((21*count) >=100000)
 		{
 			elapsedTime = 21*count / 1000;	/* For demonstrating 3 digit in micro seconds */
@@ -482,7 +481,6 @@ int32_t inputCheck(void)
 			elapsedTime = 21*count;
 			printf("Pattern function execution time is %ld nanoseconds\n", elapsedTime);
 		}
-
 #else
                 executionT = clock() - executionT;
                 double time = ((double)executionT)/CLOCKS_PER_SEC;
@@ -504,16 +502,14 @@ int32_t offsetCheck(char* str)
 
 						if((Offset < 0 ) || (Offset > (memoryOffsetValue-1)))
 							{
-#if FRDM								
+#if FRDM
 								printf("Please enter valid offset between 0 to %ld\n", memoryOffsetValue-1);
+#else
+                                printf("Please enter valid offset between 0 to %d\n", memoryOffsetValue-1);
+#endif
 								printf("PES_Prj1 >> ");
-#else								
-								printf("Please enter valid offset between 0 to %d\n", memoryOffsetValue-1);
-								printf("PES_Prj1 >> ");								
-#endif								
 								return -1;
 							}
-
 		return Offset;
 }
 /******************************************offsetCheck() [End] *************************/
@@ -530,7 +526,7 @@ int32_t lengthCheck(char* str, int32_t startOffset)
 #else
 								printf("Please enter valid length between 1 to %d\n", \
 								memoryOffsetValue-startOffset);
-#endif								
+#endif
 								printf("PES_Prj1 >> ");
 								return 0;
 							}

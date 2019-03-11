@@ -26,7 +26,7 @@ void write(int32_t* address, int32_t offset, int32_t value)
 #if FRDM
     printf(" Value: %lx written at address: %p\n\n", value, address + offset);
 #else
-    printf(" Value: %x written at address: %p\n\n", value, address + offset);	
+    printf(" Value: %x written at address: %p\n\n", value, address + offset);
 #endif
     printf("PES_Prj1 >> ");
     return;

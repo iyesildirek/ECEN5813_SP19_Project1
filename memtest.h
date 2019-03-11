@@ -14,16 +14,14 @@
 * response via functions
 *
 * @author Ismail Yesildirek & Bijan Kianian
-* @date February 24 2019
-* @version 1.3
+* @date March 10 2019
+* @version 1.4
 *
 */
-
+#include <stdint.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <time.h>
-#include <stdint.h>
 #include "allocate.h"
 #include "display.h"
 #include "free.h"
@@ -32,19 +30,12 @@
 #include "write.h"
 #include "pattern.h"
 #include "verify.h"
+#include "validate.h"
 
 
+#define FRDM 0
 
-
-#define FRDM 0              /* Substitutions for FRDM platform */
-
-#if FRDM
-
-#define LSB_WORD int32_t	/* Lower 32 bits of address are used to make immediate*/
- 	 	 	 	 	 	 	/*  addressing offset (a.k.a Block_Address_lo), passed to addressCheck(char*, int) */
-#define ADDRESS_LENGTH 8	/* Parameter for address length (PC = 12, FRDM = 8)*/
-#define SYSTICK_MAX 16000000		/* Maximum value for 24 bit Systick register*/
-
+#if FRDM          /* Substitutions for platform */
 
 #include "board.h"
 #include "peripherals.h"
@@ -55,7 +46,10 @@
 #include "core_cm0plus.h"
 
 
-
+#define LSB_WORD int32_t	/* Lower 32 bits of address are used to make immediate*/
+							/*  addressing offset (a.k.a Block_Address_lo), passed to addressCheck(char*, int) */
+#define ADDRESS_LENGTH 8	/* Parameter for address length (PC = 12, FRDM = 8)*/
+#define SYSTICK_MAX 16000000		/* Maximum value for 24 bit Systick register*/
 
 #else
 
@@ -64,7 +58,6 @@
 #define ADDRESS_LENGTH 12	/* 12 byte addressing for PC */
 
 #endif
-
 
 /* Prototype list */
 

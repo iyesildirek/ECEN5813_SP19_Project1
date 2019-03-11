@@ -26,10 +26,6 @@ int32_t* allocate(int32_t offset)
 {
   int32_t *ptr;
   ptr =(int32_t*) calloc(offset, sizeof(int32_t));  // assigning an int pointer to the block of memory with requested size
-/*
-* int32_t *ptr = (int32_t*)malloc((sizeof(int32_t))*offset);  // assigning an int pointer to the block of memory times the requested size use for malloc
-* Malloc returns void ptr with # of Bytes
-*/
 	
 /* check if there is a room available in the heap*/
   if (ptr == NULL)                          

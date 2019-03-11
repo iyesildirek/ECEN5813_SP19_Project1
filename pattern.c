@@ -1,21 +1,28 @@
+/*****************************************************************************
+* Copyright (C) 2019 by Ismail Yesildirek & Bijan Kianian
+*
+* Redistribution, modification or use of this software in source or binary
+* forms is permitted as long as the files maintain this copyright. Users are
+* permitted to modify this and use it to learn about the field of embedded
+* software. Ismail Yesildirek, Bijan Kianian, and the University of Colorado are not
+* liable for any misuse of this material.
+*
+*****************************************************************************/
 /**
-* @file allocate.c
-* @brief This source file contains code that provides the allocate() function definition
-* and frees the space allocated in the memory pointed by ptr.
+* @file pattern.c
+* @brief This source file contains code that provides the pattern() function definition.
 *
 * @author Ismail Yesildirek & Bijan Kianian
-* @date February 26 2019
-* @version 1.0
+* @date March 10 2019
+* @version 1.1
 *
 */
-
 #include "memtest.h"
 #include "pattern.h"
 
 void pattern (int32_t* start, int32_t index, uint32_t seed) /* start represents begining address
                                                 of memory cells to be written by random # */
     {
-        
         for (int32_t i = 0 ; i <= index-1 ; i++)
             {
                 uint32_t next = generate_random(seed);
@@ -62,13 +69,10 @@ void pattern (int32_t* start, int32_t index, uint32_t seed) /* start represents 
        {
 
            /* Choosing unsigned interger type to get the values 0 to 2^32 */
-
-            uint32_t a = 1664525;    /* Multiplier */
-            uint32_t c = 1013904223; /* Increment */
+            const uint32_t a = 1664525;    /* Multiplier */
+            const uint32_t c = 1013904223; /* Increment */
             uint32_t m = (uint32_t)pow(2,32);       /* Modulus */
 
             Seed = (a * Seed + c) % m;
-
             return Seed;
-
         }

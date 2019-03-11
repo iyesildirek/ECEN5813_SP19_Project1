@@ -18,7 +18,7 @@
 * @version 1.0
 *
 */
-
+#include <stdint.h>
 /* Prototype list */
 
 int32_t* allocate(int32_t);

@@ -66,7 +66,7 @@ PES_Prj1 >> read -i 5620bddf7a88
 Please enter sufficient parameters for this command, or <help> for details
 PES_Prj1 >> read -i 5620bddf7a88 55
 Please enter valid length between 1 to 8
-PES_Prj1 >> read -i 5620bddf7a88  ff 5
+PES_Prj1 >> read -i 5620bddf7aff 5
 Please enter the starting memory address between 0x5620bddf7a80 and 0x5620bddf7aa4
 PES_Prj1 >> read -i 5620bddf7a88 5
 
@@ -82,7 +82,7 @@ PES_Prj1 >> write
 Please enter sufficient parameters for this command, or <help> for details
 PES_Prj1 >> write 2
 Please enter sufficient parameters for this command, or <help> for details
-PES_Prj1 >> wrtie 2 3 aaabbb
+PES_Prj1 >> wrtie 2 aaabbb
 Invalid input, please try again: 
 PES_Prj1 >> write 2 aaabbb
  Value: aaabbb written at address: 0x5620bddf7a88
@@ -159,13 +159,13 @@ PES_Prj1 >> invert -i 4554
 Please enter sufficient parameters for this command, or <help> for details
 PES_Prj1 >> invert -i 65468 3
 Please enter a valid hex number for the memory address
-PES_Prj1 >> invert 5620bddf7a88  9c
+PES_Prj1 >> invert 5620bddf7a88
 Please enter sufficient parameters for this command, or <help> for details
-PES_Prj1 >> invert -i 5620bddf7a88  9c 
+PES_Prj1 >> invert -i 5620bddf7a88
 Please enter sufficient parameters for this command, or <help> for details
-PES_Prj1 >> invert -i 5620bddf7a88  9c 10
+PES_Prj1 >> invert -i 5620bddf7a88 10
 Please enter valid length between 1 to 3
-PES_Prj1 >> invert -i 5620bddf7a88  9c 3
+PES_Prj1 >> invert -i 5620bddf7a88 3
 Invert function execution time is milli: 0.005000sec.
 Enter another command 
 
@@ -194,7 +194,7 @@ PES_Prj1 >> n
 Memory allocated remains in address 0x0x5620bddf7a80
 Enter another command 
 
-PES_Prj1 >> allocate          read 0 10
+PES_Prj1 >> read 0 10
 
    Address                     Value 	 Index
   ------------               ----------	 ------
@@ -242,7 +242,7 @@ PES_Prj1 >> pattern 2
 Please enter sufficient parameters for this command, or <help> for details
 PES_Prj1 >> pattern 2 3
 Please enter sufficient parameters for this command, or <help> for details
-PES_Prj1 >> par  attern 2 3 1
+PES_Prj1 >> pattern 2 3 1
 
 	##########################
 	#     Random numbers     #
@@ -261,13 +261,13 @@ PES_Prj1 >> pattern -i
 Please enter sufficient parameters for this command, or <help> for details
 PES_Prj1 >> pattern -i errg434
 Please enter sufficient parameters for this command, or <help> for details
-PES_Prj1 >> pattern -i 5620bddf7a88  c8 
+PES_Prj1 >> pattern -i 5620bddf7a88 
 Please enter sufficient parameters for this command, or <help> for details
 PES_Prj1 >> pattern -i 5620bddf7ac8 10
 Please enter sufficient parameters for this command, or <help> for details
 PES_Prj1 >> pattern -i 5620bddf7ac8 10 1
 Please enter valid length between 1 to 4
-PES_Prj1 >> pattern -i 5620bddf7ac8 4 3
+PES_Prj1 >> pattern -i 5620bddf7ac8 3
 Please enter sufficient parameters for this command, or <help> for details
 PES_Prj1 >> pattern -i 5620bddf7ac8 3 1
 

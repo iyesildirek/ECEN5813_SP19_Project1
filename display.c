@@ -14,8 +14,8 @@
 * and displays content of memory in terms of 32 bit words in hexadecimal format.
 *
 * @author Ismail Yesildirek & Bijan Kianian
-* @date February 24 2019
-* @version 1.4
+* @date March 10 2019
+* @version 1.5
 *
 */
 
@@ -33,11 +33,11 @@ void display(int32_t* address, int32_t offset)
 #endif
     for(int32_t i = 0 ; i < offset ; i++)
     {
-#if FRDM       
-		printf(" %p              0x%08lx    %ld\n" , address + i, *(address + i),i);
-#else       
-		printf(" %p              0x%08x    %d\n" , address + i, *(address + i),i);		
-#endif	
+#if FRDM
+        printf(" %p              0x%08lx    %ld\n" , address + i, *(address + i),i);
+#else
+        printf(" %p              0x%08x    %d\n" , address + i, *(address + i),i);
+#endif
     }
     printf("\n");
 	printf("PES_Prj1 >> ");

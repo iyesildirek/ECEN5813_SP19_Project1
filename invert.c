@@ -45,7 +45,6 @@ void invert(int32_t* address, int32_t offset)
 
 	/*write to memory section*/
 	*(address + offset) = value;
-	//printf("\n");
 	}
 	return;
 }

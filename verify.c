@@ -1,11 +1,21 @@
+/*****************************************************************************
+* Copyright (C) 2019 by Ismail Yesildirek & Bijan Kianian
+*
+* Redistribution, modification or use of this software in source or binary
+* forms is permitted as long as the files maintain this copyright. Users are
+* permitted to modify this and use it to learn about the field of embedded
+* software. Ismail Yesildirek, Bijan Kianian, and the University of Colorado are not
+* liable for any misuse of this material.
+*
+*****************************************************************************/
 /*
-* @file allocate.c
-* @brief This source file contains code that provides the allocate() function definition
-* and frees the space allocated in the memory pointed by ptr.
+* @file verify.c
+* @brief This source file contains code that provides the verify() function definition
+* and is used in conjunction with the validate(). 
 *
 * @author Ismail Yesildirek & Bijan Kianian
-* @date March 6 2019
-* @version 1.01
+* @date March 10 2019
+* @version 1.02
 */
 
 #include "memtest.h"
@@ -21,14 +31,14 @@ void verify(int32_t* Block_Address, int32_t StartOffset, int32_t NumberOfwords, 
 	pattern(Block_Address + StartOffset, NumberOfwords, userSeed);
 
 #if FRDM
-
 	 uint32_t count = 0;			/* Counter value */
 	 uint32_t elapsedTime = 0;		/* time value in micro or nano seconds */
 	 uint16_t done = SysTick_Config(16000000);		/* Enable the counting, every 1 microsec the counter 'count' will increment */
 	 if(done)
-	   printf("Reset Systick");
-
-	 #else
+	{
+	 printf("Reset Systick");
+	}
+#else
 	clock_t executionT;
 	executionT = clock();
 #endif
@@ -65,7 +75,6 @@ void verify(int32_t* Block_Address, int32_t StartOffset, int32_t NumberOfwords, 
 			elapsedTime = 21*count;
 			printf("Verify function execution time is %ld nanoseconds\n", elapsedTime);
 		}
-
 #else
 	executionT = clock() - executionT;
     double time = ((double)executionT)/CLOCKS_PER_SEC;
