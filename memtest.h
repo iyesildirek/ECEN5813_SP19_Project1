@@ -30,8 +30,6 @@
 #include "write.h"
 #include "pattern.h"
 #include "verify.h"
-#include "validate.h"
-
 
 #define FRDM 0
 

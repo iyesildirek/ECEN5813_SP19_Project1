@@ -11,7 +11,7 @@
 /*
 * @file verify.c
 * @brief This source file contains code that provides the verify() function definition
-* and is used in conjunction with the validate(). 
+* and is used to validate the linear Congruential Generator pattern(). 
 *
 * @author Ismail Yesildirek & Bijan Kianian
 * @date March 10 2019
