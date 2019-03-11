@@ -28,7 +28,7 @@ void verify(int32_t* Block_Address, int32_t StartOffset, int32_t NumberOfwords, 
     uint32_t m = (uint32_t)pow(2,32);       /* Modulus */
 	int32_t Seed = userSeed;
 	uint8_t identical =0;
-	pattern(Block_Address + StartOffset, NumberOfwords, userSeed);
+	//pattern(Block_Address + StartOffset, NumberOfwords, userSeed);
 
 #if FRDM
 	 uint32_t count = 0;			/* Counter value */
@@ -45,6 +45,7 @@ void verify(int32_t* Block_Address, int32_t StartOffset, int32_t NumberOfwords, 
 
 	for (int32_t i = 0; i < NumberOfwords-1; i++)
 		{
+		/*Re-Generate Seed and compare with exiting memory block*/
 			Seed = (a * Seed + c) % m;
 			int32_t value = *(Block_Address + StartOffset + i);
 			if (value != Seed)
