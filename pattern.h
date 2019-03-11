@@ -9,13 +9,13 @@
 *
 *****************************************************************************/
 /**
-* @file pattern.h
+* @file free.h
 * @brief This header file provides user interface interaction
 * response via functions
 *
 * @author Ismail Yesildirek & Bijan Kianian
-* @date March 9 2019
-* @version 1.1
+* @date February 26 2019
+* @version 1.0
 *
 */
 
@@ -23,7 +23,7 @@
 
 /* Prototype list */
 
-void pattern(int*, int,unsigned int);
-int generate_random(unsigned int);
+void pattern(int32_t*, int32_t,uint32_t);
+ int32_t generate_random(uint32_t);
 
 /* End prototype list */

@@ -21,7 +21,7 @@
 
 /* Prototype list */
 
-void verify(int*, int, int, unsigned int);
+void verify(int32_t*, int32_t, int32_t, uint32_t);
 
 /* End prototype list */
 

@@ -21,6 +21,6 @@
 
 /* Prototype list */
 
-void write(int*, int, int);
+void write(int32_t*, int32_t, int32_t);
 
 /* End prototype list */

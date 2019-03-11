@@ -22,13 +22,22 @@
 #include "memtest.h"
 #include "display.h"
 
-void display(int* address, int offset)
+void display(int32_t* address, int32_t offset)
 {
-    printf("\n   Address                     Value \t Index\n");
+#if FRDM
+	printf("\n Address                   Value     Index\n");	/* Column width correction for FRDM vs PC platforms*/
+	printf("------------             ----------  ------\n");
+#else
+	printf("\n   Address                     Value \t Index\n");
     printf("  ------------               ----------\t ------\n");
-    for(int i = 0 ; i < offset ; i++)
+#endif
+    for(int32_t i = 0 ; i < offset ; i++)
     {
-        printf(" %p              0x%08x    %d\n" , address + i, *(address + i),i);
+#if FRDM       
+		printf(" %p              0x%08lx    %ld\n" , address + i, *(address + i),i);
+#else       
+		printf(" %p              0x%08x    %d\n" , address + i, *(address + i),i);		
+#endif	
     }
     printf("\n");
 	printf("PES_Prj1 >> ");

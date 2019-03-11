@@ -22,12 +22,12 @@
 #include "memtest.h"
 #include "allocate.h"
 
-int* allocate(int offset)
+int32_t* allocate(int32_t offset)
 {
-  int *ptr;
-  ptr =(int*) calloc(offset, sizeof(int));  // assigning an int pointer to the block of memory with requested size
+  int32_t *ptr;
+  ptr =(int32_t*) calloc(offset, sizeof(int32_t));  // assigning an int pointer to the block of memory with requested size
 /*
-* int *ptr = (int*)malloc((sizeof(int))*offset);  // assigning an int pointer to the block of memory times the requested size use for malloc
+* int32_t *ptr = (int32_t*)malloc((sizeof(int32_t))*offset);  // assigning an int pointer to the block of memory times the requested size use for malloc
 * Malloc returns void ptr with # of Bytes
 */
 	
