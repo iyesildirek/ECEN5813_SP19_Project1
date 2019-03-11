@@ -14,8 +14,8 @@
 * response via functions
 *
 * @author Ismail Yesildirek & Bijan Kianian
-* @date March 9 2019
-* @version 1.1
+* @date February 26 2019
+* @version 1.0
 *
 */
 
@@ -26,10 +26,5 @@
 void pattern(int32_t*, int32_t,uint32_t);
 int32_t generate_random(uint32_t);
 
-<<<<<<< HEAD
-=======
-void pattern(int*, int,unsigned int);
-int generate_random(unsigned int);
->>>>>>> d49cba67a9ba966e7ba7441cd0a701325ce33c13
 
 /* End prototype list */
