@@ -35,7 +35,7 @@ void invert(int32_t* address, int32_t offset)
 	int32_t temp = *(address + offset);
 	//printf(" Current Value: %x written at address: %p\n\n", *(address + offset), address + offset);
 	int32_t bitPosition;
-    for (int32_t i = 0; i < 32; i++)
+    for (int16_t i = 0; i < 32; i++)
 	{
 		bitPosition = 1<<i;
 		temp = (temp ^ bitPosition);

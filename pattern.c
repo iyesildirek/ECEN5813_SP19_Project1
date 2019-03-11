@@ -23,7 +23,7 @@
 void pattern (int32_t* start, int32_t index, uint32_t seed) /* start represents begining address
                                                 of memory cells to be written by random # */
     {
-        for (int32_t i = 0 ; i <= index-1 ; i++)
+        for (int16_t i = 0 ; i <= index-1 ; i++)
             {
                 uint32_t next = generate_random(seed);
                 *(start + i) = next;             /* Writing the generated number into memory block */
@@ -67,7 +67,6 @@ void pattern (int32_t* start, int32_t index, uint32_t seed) /* start represents 
 
     int32_t generate_random( uint32_t Seed)
        {
-
            /* Choosing unsigned interger type to get the values 0 to 2^32 */
             const uint32_t a = 1664525;    /* Multiplier */
             const uint32_t c = 1013904223; /* Increment */

@@ -31,10 +31,10 @@ void display(int32_t* address, int32_t offset)
 	printf("\n   Address                     Value \t Index\n");
     printf("  ------------               ----------\t ------\n");
 #endif
-    for(int32_t i = 0 ; i < offset ; i++)
+    for(int16_t i = 0 ; i < offset ; i++)
     {
 #if FRDM
-        printf(" %p              0x%08lx    %ld\n" , address + i, *(address + i),i);
+        printf(" %p              0x%08lx    %d\n" , address + i, *(address + i),i);
 #else
         printf(" %p              0x%08x    %d\n" , address + i, *(address + i),i);
 #endif

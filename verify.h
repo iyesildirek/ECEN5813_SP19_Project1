@@ -22,7 +22,7 @@
 #include <stdint.h>
 /* Prototype list */
 
-void verify(int32_t*, int32_t, int32_t, uint32_t);
+void verify(int32_t*, int32_t, int32_t, int32_t);
 
 /* End prototype list */
 

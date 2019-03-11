@@ -22,7 +22,7 @@
 
 int32_t memoryOffsetValue  = 0;       /* Offset value for the memory block to be allocated*/
 int32_t* Block_Address = NULL;       /* Place holder for block address*/
-int32_t allocStatus = 0;	/* Malloc Flag */
+int8_t allocStatus = 0;	/* Malloc Flag */
 
 int main()
 {
@@ -40,7 +40,7 @@ int main()
 	printf("This is a simple program for testing memory.\r\n");
 	printf("Type 'help' for more details or 'exit' to leave the program: \r\n");
     printf("PES_Prj1 >> ");
-	int32_t validStatus = 0;
+	int8_t validStatus = 0;
 
     while(validStatus == 0)
        {
@@ -52,7 +52,8 @@ int main()
 /*########################################## inputCheck() [Start] #######################################################*/
 int32_t inputCheck(void)
 {
-    char *cmds[] = { "help", "exit", "allocate", "free", "read", "write", "invert", "pattern", "verify"};         /* Constant strings to be compared with user input commands */
+    char *cmds[] = { "help", "exit", "allocate", "free", "read", "write", "invert", "pattern", "verify"};         
+	/* Constant strings to be compared with user input commands */
     char *Token[10] = {};               /* Array of strings for saving tokens in command line after parsing user input line*/
     char userInput[50] = {}, temp;      /* Array to store input command line string */
     uint32_t memoryValue;
@@ -67,7 +68,7 @@ int32_t inputCheck(void)
 	char allocInput[6]; /*For re-alloc question*/
         /***** Parsing variables ******/
      char *pToken;                 /* Token pointer to be used in parsing command line input string*/
-     int32_t tokenCount;               /* Counter used in parsing procedure*/
+     int8_t tokenCount;               /* Counter used in parsing procedure*/
      char **str[10];               /* Array of strings pointed to by the token*/
         /*******************************/
 
@@ -79,7 +80,7 @@ int32_t inputCheck(void)
      compareResult = strcmp(userInput,"");
      while(compareResult == 32)      /* Validating user input, No input = 'SPACE' (i.e decimal value 32)*/
       {
-        int32_t value = 0;
+        int8_t value = 0;
         printf("Please enter a valid command, or <help> for details\n\n");
         printf("PES_Prj1 >> ");
         return value;
@@ -112,7 +113,7 @@ int32_t inputCheck(void)
 	       }
 /****************************************** Parsing End **************************************************/
 
-	int32_t valid = 0;
+	int8_t valid = 0;
 		if (strcmp(Token[0], cmds[0]) == 0)             /*     help()     */
 			{
 				valid = 0;
@@ -238,8 +239,10 @@ int32_t inputCheck(void)
 					return valid;
 
 
-				if(strcmp(Token[1] , "-i"))																					//	For relative addressing:
-					{																														//	Token[1] != "-i" , Token[1] = <start offset>, Token[2] = <end offset >,Token[3] == 0.
+				if(strcmp(Token[1] , "-i"))																					
+					{																														
+					/* For relative addressing:
+					*  Token[1] != "-i" , Token[1] = <start offset>, Token[2] = <end offset >,Token[3] == 0. */
 						startOffset = offsetCheck(Token[1]);
 						numberOfwords = lengthCheck(Token[2], startOffset);
 
@@ -250,8 +253,10 @@ int32_t inputCheck(void)
 						return valid;
 					}
 
-		        if(!strcmp(Token[1] , "-i"))    																				//	For immediate addressing:
-                    {																														//	Token[1] == "-i", Token[2] = <address>, Token[3] = <offset>.
+		        if(!strcmp(Token[1] , "-i"))    																				
+                    {																														
+					/* For relative addressing:
+					*  Token[1] != "-i" , Token[2] = <address>, Token[3] = <offset> */
 						Block_Address_lo =  (LSB_WORD)Block_Address;
 						memoryAddress = addressCheck(Token[2], Block_Address_lo);
 
@@ -277,8 +282,11 @@ int32_t inputCheck(void)
 				if(!(alloc_test( Token[0], Token[1], Token[2], Token[3], Token[4])))
 					return valid;
 
-				if(strcmp(Token[1] , "-i"))																					//	For relative addressing:
-					{																														//	Token[1] != "-i" , Token[1] = <offset>, Token[2] = <value>,Token[3] == 0.
+				if(strcmp(Token[1] , "-i"))																					
+					{																														
+					/* For relative addressing:
+					*  Token[1] != "-i" , Token[1] = <offset>, Token[2] = <value>,Token[3] == 0. */
+					
 						startOffset = offsetCheck(Token[1]);
 						memoryValue = valueCheck(Token[2]);
 
@@ -312,7 +320,8 @@ int32_t inputCheck(void)
 					return valid;
 
 				if(strcmp(Token[1] , "-i")) /* Relative addressing <offset> < value>*/
-                    {																														//	Token[1] != "-i" , Token[1] = <offset>, Token[2] = <value>,Token[3] == 0.
+                    {																														
+					/*	Token[1] != "-i" , Token[1] = <offset>, Token[2] = <value>,Token[3] == 0. */
 						startOffset = offsetCheck(Token[1]);
 						numberOfwords = lengthCheck(Token[2], startOffset);
 
@@ -623,10 +632,9 @@ int32_t alloc_test(char* str0, char* str1, char* str2, char* str3, char* str4)
 			return 1;
 }
 /************************************** alloc_test() [End] *************************************************/
- /**************************************invert_Time() [Start]************************************************/
 
+/**************************************invert_Time() [Start]************************************************/
  void invert_Time (int32_t startOffset, int32_t numberOfwords )
-
  {
 	 int32_t wordSize = numberOfwords;
 	/**
@@ -641,12 +649,11 @@ int32_t alloc_test(char* str0, char* str1, char* str2, char* str3, char* str4)
 	 if(done)
 	   printf("Reset Systick");
 
-	 #else
-
+#else
 	clock_t executionT;				/* For PC platform under Linux */
 	executionT = clock();
-#endif
 
+#endif
 	while ((numberOfwords <= wordSize) && (numberOfwords -1>=0))
 		{
 			invert(Block_Address+startOffset-1, numberOfwords);
@@ -672,8 +679,8 @@ int32_t alloc_test(char* str0, char* str1, char* str2, char* str3, char* str4)
 	executionT = clock() - executionT;
 	double time = ((double)executionT)/CLOCKS_PER_SEC;
 	printf("Invert function execution time is milli: %f sec.\n", time*1000);
-#endif
 
+#endif
 	printf("Enter another command \n\n");
 	printf("PES_Prj1 >> ");
  }

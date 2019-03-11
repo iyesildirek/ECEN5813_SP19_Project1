@@ -21,13 +21,13 @@
 #include "memtest.h"
 #include "verify.h"
 
-void verify(int32_t* Block_Address, int32_t StartOffset, int32_t NumberOfwords, uint32_t userSeed)
+void verify(int32_t* Block_Address, int32_t StartOffset, int32_t NumberOfwords, int32_t userSeed)
 {
 	uint32_t a = 1664525;    /* Multiplier */
     uint32_t c = 1013904223; /* Increment */
     uint32_t m = (uint32_t)pow(2,32);       /* Modulus */
 	int32_t Seed = userSeed;
-	int32_t identical =0;
+	uint8_t identical =0;
 	pattern(Block_Address + StartOffset, NumberOfwords, userSeed);
 
 #if FRDM
@@ -79,14 +79,14 @@ void verify(int32_t* Block_Address, int32_t StartOffset, int32_t NumberOfwords, 
 	executionT = clock() - executionT;
     double time = ((double)executionT)/CLOCKS_PER_SEC;
     printf("Pattern function execution time is milli: %fsec.\n",time*1000);
+	
 #endif
-
 		if (identical == 0)
+		{
 			printf("The expected and actual values are identical!\n");
-
+		}
 		printf("Enter another command \n\n");
 		printf("PES_Prj1 >> ");
-
 		return;
 }
 
