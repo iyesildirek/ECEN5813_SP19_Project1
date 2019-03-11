@@ -9,18 +9,21 @@
 *
 *****************************************************************************/
 /**
-* @file allocate.h
+* @file pattern.h
 * @brief This header file provides user interface interaction
 * response via functions
 *
 * @author Ismail Yesildirek & Bijan Kianian
-* @date February 24 2019
+* @date March 10 2019
 * @version 1.0
 *
 */
-#include <stdint.h>
-/* Prototype list */
 
-int32_t* allocate(int32_t);
+#include <stdint.h>
+#include <math.h>
+
+/* Prototype list */
+void pattern(int32_t*, int32_t,uint32_t);
+int32_t generate_random(uint32_t);
 
 /* End prototype list */

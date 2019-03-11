@@ -10,9 +10,9 @@
 *****************************************************************************/
 /**
 * @file invert.c
-* @brief This source file contains code that provides the invert() function definition 
+* @brief This source file contains code that provides the invert() function definition
 * and inverts all memory bits in a specified area of memory. This function also provides
-* the time taken to perform the operation. 
+* the time taken to perform the operation.
 *
 * @author Ismail Yesildirek & Bijan Kianian
 * @date February 24 2019
@@ -23,7 +23,7 @@
 #include "memtest.h"
 #include "invert.h"
 
-void invert(int* address, int offset)
+void invert(int32_t* address, int32_t offset)
 {
 	if(address ==NULL)
 	{
@@ -32,20 +32,19 @@ void invert(int* address, int offset)
 	}
 	else
 	{
-	int temp = *(address + offset);
+	int32_t temp = *(address + offset);
 	//printf(" Current Value: %x written at address: %p\n\n", *(address + offset), address + offset);
-	int bitPosition;
-    for (int i = 0; i < 32; i++)  
+	int32_t bitPosition;
+    for (int16_t i = 0; i < 32; i++)
 	{
 		bitPosition = 1<<i;
-		temp = (temp ^ bitPosition); 
+		temp = (temp ^ bitPosition);
 	}
-	
-	int value = temp; 
-	
-	/*write to memory section*/ 
+
+	int32_t value = temp;
+
+	/*write to memory section*/
 	*(address + offset) = value;
-	//printf("\n");
 	}
 	return;
 }

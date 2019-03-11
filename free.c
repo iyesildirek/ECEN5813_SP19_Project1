@@ -22,7 +22,7 @@
 #include "memtest.h"
 #include "free.h"
 
-void free_memory(int *pointer)
+void free_memory(int32_t *pointer)
 {
 	if (*pointer) /* use for calloc */
 /*	if (!*pointer) // user for malloc */

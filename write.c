@@ -10,21 +10,24 @@
 *****************************************************************************/
 /**
 * @file write.c
-* @brief This source file contains a c program  that provides the write() function definition
-* and writes to a prevously allocated block of memory a hex number.
+* @brief This source file contains a c program to manipulate and test memory.
+*
 * @author Ismail Yesildirek & Bijan Kianian
-* @date February 24 2019
-* @version 1.0
+* @date March 10 2019
+* @version 1.1
 *
 */
-
 #include "memtest.h"
 #include "write.h"
 
-void write(int* address, int offset, int value)
+void write(int32_t* address, int32_t offset, int32_t value)
 {
     *(address + offset) = value;
+#if FRDM
+    printf(" Value: %lx written at address: %p\n\n", value, address + offset);
+#else
     printf(" Value: %x written at address: %p\n\n", value, address + offset);
-	printf("Enter another command: \n");
+#endif
+    printf("PES_Prj1 >> ");
     return;
 }
