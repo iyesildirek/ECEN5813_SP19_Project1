@@ -26,3 +26,14 @@ Memory at the indicated location is modified accordingly.
 Invert block - Use an XOR operation to invert all memory bits in a specified area of memory. 
 On completion, this command should report the amount of time taken to perform the operation.
 
+Write pattern - Write a pseudo-random pattern in a user specified (address and length) area of memory using a 
+user specified seed value. On completion, this command should report the amount of time taken to perform the 
+operation.
+
+Verify pattern - Verify a pseudo-random pattern in a specified (address and length) area of memory using a 
+specified seed value. If pattern does not match, command should print expected and actual value and memory 
+address where the discrepancy was found. On successful completion, this command should report the amount of 
+time taken to perform the operation.
+
+Functions should do bounds checking and warn the user if they attempt to read or write memory outside the 
+allocated range (or if no memory block has been allocated) but should give users the option to ignore the warnings.
