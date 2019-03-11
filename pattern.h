@@ -9,7 +9,7 @@
 *
 *****************************************************************************/
 /**
-* @file free.h
+* @file pattern.h
 * @brief This header file provides user interface interaction
 * response via functions
 *
@@ -19,11 +19,12 @@
 *
 */
 
+#include <stdint.h>
 #include <math.h>
 
 /* Prototype list */
+void pattern(int32_t*, int32_t,uint32_t);
+int32_t generate_random(uint32_t);
 
-void pattern(int*, int,unsigned int);
- int generate_random(unsigned int);
 
 /* End prototype list */

@@ -8,17 +8,16 @@
 * @version 1.0
 *
 */
-
 #include "memtest.h"
 #include "pattern.h"
 
-void pattern (int* start, int index, unsigned int seed) /* start represents begining address
+void pattern (int32_t* start, int32_t index, uint32_t seed) /* start represents begining address
                                                 of memory cells to be written by random # */
     {
-        
-        for (int i = 0 ; i <= index-1 ; i++)
+
+        for (int32_t i = 0 ; i <= index-1 ; i++)
             {
-                unsigned int next = generate_random(seed);
+                uint32_t next = generate_random(seed);
                 *(start + i) = next;             /* Writing the generated number into memory block */
                 seed = next;
             }
@@ -58,14 +57,15 @@ void pattern (int* start, int index, unsigned int seed) /* start represents begi
             In random number generation techniques using the same seed each time will yeild
             the same set of numbers, which is expected. **/
 
-    int generate_random(unsigned int Seed)
+    int32_t generate_random( uint32_t Seed)
        {
 
            /* Choosing unsigned interger type to get the values 0 to 2^32 */
 
-            unsigned int a = 1664525;    /* Multiplier */
-            unsigned int c = 1013904223; /* Increment */
-            unsigned long int m = pow(2,32);       /* Modulus */
+            const uint32_t a = 1664525;    /* Multiplier */
+            const uint32_t c = 1013904223; /* Increment */
+
+            uint32_t m = (uint32_t)pow(2,32);       /* Modulus */
 
             Seed = (a * Seed + c) % m;
 

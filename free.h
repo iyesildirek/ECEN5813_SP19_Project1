@@ -18,9 +18,9 @@
 * @version 1.0
 *
 */
-
+#include <stdint.h>
 /* Prototype list */
 
-void free_memory(int*);
+void free_memory(int32_t*);
 
 /* End prototype list */

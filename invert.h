@@ -19,8 +19,9 @@
 *
 */
 
+#include <stdint.h>
 /* Prototype list */
 
-void invert(int*, int);
+void invert(int32_t*, int32_t);
 
 /* End prototype list */

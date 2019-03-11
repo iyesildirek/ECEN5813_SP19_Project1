@@ -19,8 +19,9 @@
 *
 */
 
+#include <stdint.h>
 /* Prototype list */
 
-void display(int*, int);
+void display(int32_t*, int32_t);
 
 /* End prototype list */
