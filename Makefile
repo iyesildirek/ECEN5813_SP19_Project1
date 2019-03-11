@@ -20,8 +20,15 @@ pattern.o: pattern.c pattern.h
 	$(CC) $(CFLAGS) pattern.c
 verify.o: verify.c verify.h
 	$(CC) $(CFLAGS) verify.c
-test: memtest test.txt
+
+# Syntax $: make test FRDM=1 //Default FRDM =0;
+test: memtest test_FRDM.txt test_FRDM.txt
+ifdef FRDM			
+		./memtest<test_FRDM.txt>outputFile.txt		
+else
 		./memtest<test.txt>outputFile.txt
+endif
+
 clean:
 	rm -rf *o memtest
 	rm -rf outputFile.txt

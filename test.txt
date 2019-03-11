@@ -80,6 +80,7 @@ read 0 10
 free
 allocate 10
 read 0 10
+pattern 0 10 5
 verify
 verify 0
 verify 0 3
@@ -92,6 +93,9 @@ verify -i 5620bddf7aec 12
 verify -i 5620bddf7aec 12 1
 verify -i 5620bddf7aec 3 2
 read 0 10
+verify 0 10 5
+read 0 10
+invert 0 1
 verify 0 10 5
 read 0 10
 free
