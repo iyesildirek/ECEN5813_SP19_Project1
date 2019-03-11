@@ -13,8 +13,8 @@
 * @brief This source file contains a c program to manipulate and test memory.
 *
 * @author Ismail Yesildirek & Bijan Kianian
-* @date February 23 2019
-* @version 1.0
+* @date March 10 2019
+* @version 1.1
 *
 */
 #include "memtest.h"
