@@ -1,4 +1,0 @@
-help
-allocate 5
-free
-exit
